@@ -7,14 +7,23 @@ public class ArraysMain {
 	private String[] testArray;
 	private int[] intRay; 
 	public ArraysMain() {
-		intRay = new int[100];
+		//intRay = new int[10];
 		//populate(intRay);
 		//checkOccurences(intRay,3,18);
-		populate1ToN(intRay);
-		shuffle(intRay);
+		//populate1ToN(intRay);
+		//frontToBack(intRay);
+		//shuffle(intRay);
 		//Arrays is a Utility class included in Java formatting output.
 		System.out.println(Arrays.toString(intRay));
+		int[] consecTest1 = {1,2,3,6,7,8,9,10,11,45,46,47};
+		int[] consecTest2 = {10,11,12,13,14,15,6,7,8,9,10,11,45,46,47};
+		int[] randomRolls = new int[1000];
+		populate(randomRolls);
 		
+		System.out.println("The longest sequence in the first test is" + longestConsecutiveSequence(consecTest1));
+		System.out.println("The longest sequence in the second test is" + longestConsecutiveSequence(consecTest2));
+		int[] result = longestConsecSeqAndPos(randomRolls);
+		System.out.println("The longest sequence of dice rolls is" + result[0] + " it happened on the " + (result[1]+1) + "th roll. Starting with a roll of " +randomRolls[result[1]] + ".");
 		}
 		
 	private void shuffle(int[] arr) {
@@ -39,7 +48,90 @@ public class ArraysMain {
 		}
 		
 	}
+	public int[] reverseOrder(int[]arr) {
+		int[] newArr = new int[arr.length];
+		for( int i = 0; i<arr.length;i++) {
+			newArr[i] = arr[arr.length-1-i]; 
+		}
+		return newArr;
+	}
+	public int CountLessThan(int[] arr,int n) {
+		int count = 0;
+		for(int value: arr) {
+			if(value < n)count++;
+		}
+		//you use for each because we don't need a reference to the index.
+		//just need to find the integer, don't need the indices.  
+		return count;
+	}
+	/*
+	 * remove the element at index zero, push every other element up by one.
+	 * Put the element that at zero at the end of arr
+	 * 
+	 */
+	public void frontToBack(int[]arr) {
+		int front = arr[0];
+		for(int i= 0; i<arr.length-1;i++){
+			arr[i] = arr[i+1];
+			
+		}
+		arr[arr.length-1] = front;
+	}
+	/*
+	 * returns the length of the longest sequence of consecutive integers in arr
+	 * For example LCS({1,2,3,7,8,9,10}) returns 4 because 7,8,9,10 is 4 integers long.
+	 */
+	public int[] longestConsecSeqAndPos(int[] arr) {
+		int[] data = new int [2];
+		data = longestConsecutiveSequence(arr);
+		return data;
+	}
+	public int longestConsecutiveSequence(int[] arr) {
+		int count = 0; int temp = 0; 
+		for(int i = 0;i < arr.length;i++) {
+			if(isConsecutive(arr,i)) {
+				count++;
+			}
+			else {
+				if(temp < count) {
+					temp = count;
+				}
+			}count =1;
+		}
+		if(temp < count)
+		{
+			temp = count;
+		}
+		return temp;
+	}
 
+	//return true if arr[pos] and arr[pos+1] are sequential.
+	public boolean isConsecutive(int[] arr, int n) {
+		if(n == 0) {
+			return true;
+		}
+			if(arr[n]== arr[n-1]+1)
+			{
+				return true;
+			}
+			return false;
+		}
+		}
+
+	public void reverseOrderOriginal(int[]arr) {
+	
+		for( int i = 0; i<arr.length/2;i++) {
+			swap(arr,i,arr.length-1-i);
+		}
+		//it swaps twice, so if divide by two it doesn't count everything twice.
+	}
+	
+	 // moves the front to the back repeatedly, exactly n times
+	public void cycleThrough(int[] arr, int n) {
+		for (int i = 0; i<n; i++) {
+			frontToBack(arr);
+		}
+	}
 	private void checkOccurences(int[] arr, int start, int end) {
 		int[] counter = new int[end-start+1];
 		for(int value:arr) {

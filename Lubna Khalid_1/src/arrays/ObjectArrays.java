@@ -1,15 +1,75 @@
 package arrays;
 
+import java.util.Arrays;
+
 public class ObjectArrays {
 
 	public ObjectArrays() {
-		Object[] people = new Object[20];
+		Person[] people = new Person[12];
 		populate (people);
-		people[0] = new Thing("coffe maker");
-		for(Object p: people) {
-			System.out.println(p);
+	//	people[0] = new Thing("coffee maker");
+		for(Person p: people) {
+			p.mingle(people);
+			p.printFriend();
+			System.out.println("");
 		} 
+		Person[] group = selectGroup(people,4);
+		System.out.println(Arrays.toString(group));
 	
+	}
+
+	public Person[] selectGroup(Person[] population, int length) {
+		Person[] group = new Person[length];
+		group[0] = selectAPerson(population);
+		for(int i = 0; i<length; i++) {
+		Person nextPerson = selectAPerson(population);
+		while(personInGroup(group, nextPerson)) {
+			nextPerson = selectAPerson(population);
+		}
+		group[i] = nextPerson;
+
+	}
+		return group;
+	}
+	/*
+	 * return the number of differences between the two arrays.
+	 * A "difference" means they don't have the same element
+	 * at the same position.
+	 * 
+	 * they're both the same length.
+	 */
+	public double countDifferences(Person[] arr1, Person[] arr2) {
+		int count = 0;
+		for(int i = 0;i< arr2.length; i++) {
+			if(arr1[i] == arr2[i] ) {
+				count++;
+			}
+		}
+		return count;
+		
+	}
+	/*
+	 * calls count differences on two Person arrays,
+	 * each array must contain the same elements, but randomly order.
+	 * Print the number of differences between the two arrays.
+	 * Do this a 100 times, print the average (hint : average needs to be a double.)
+	 */
+		public void testShuffling() {
+			
+		}
+	private boolean personInGroup(Person[] group, Person nextPerson) {
+		for(int i = 0; i<group.length;i++) {
+			if(group[i] == nextPerson) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private Person selectAPerson(Person[] population) {
+		int randomNum = (int)(Math.random()*population.length);
+		return population[randomNum];
+		
 	}
 
 	private void populate(Object[] people) {

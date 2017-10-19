@@ -116,7 +116,7 @@ public class ArraysMain {
 			}
 			return false;
 		}
-		}
+		
 
 	public void reverseOrderOriginal(int[]arr) {
 	

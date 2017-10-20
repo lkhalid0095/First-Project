@@ -13,7 +13,7 @@ public class Main {
 	 * it is the idea of avoiding an ArrayIndexOutofBoundsException.
 	 * You will see it on quizzes, tests and projects rubrics.
 	 * ALWAYS BE MINDFUL!!
-	 */
+	 */s
 	public static void changeNeighbors(int[] arr, int psn) {
 		arr[psn] = arr[psn] +1;
 		if(psn - 1>= -0);

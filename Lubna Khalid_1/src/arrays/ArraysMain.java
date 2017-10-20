@@ -60,6 +60,7 @@ public class ArraysMain {
 		for(int value: arr) {
 			if(value < n)count++;
 		}
+		//array is a collection of its references.
 		//you use for each because we don't need a reference to the index.
 		//just need to find the integer, don't need the indices.  
 		return count;

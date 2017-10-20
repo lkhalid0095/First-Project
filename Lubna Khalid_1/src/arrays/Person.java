@@ -14,11 +14,13 @@ public class Person {
 	 private String lastName;
 	private Borough home;
 	private Hobby hobby;
+	private String nickname;
 	private Person[] friends ;
 	public Person (String first, String last, Borough home){
 		this.firstName = first;
 		this.lastName = last;
 		this.home = home;
+		this.nickname = createNickname(firstName);
 		this.hobby = Hobby.randomHobby();
 		friends = new Person[3];
 	}
@@ -26,6 +28,49 @@ public class Person {
 	 * chooses friends from People based on who is of the same class 
 	 * as this instaance and who has the same hobbies.
 	 */
+	//------------------------------------------------------
+	/*JAVA IS PASS-BY VALUE
+	 * MEANING THE PARAMETERS OF A METHOD ARE JUST VALUES, NOT REFERENCES
+	 * SO IF YOU CHANGED THOSE VALUES, THE ORIGINAL OBJECT IS NOT AFFECTED.
+	 * IN THIS CASE, 'name' WILL NOT BE CHANGED. IN FACT NOTHING CAN CHANGE
+	 * this.firstName via name.
+	 */
+
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+		nickname = createNickname(firstName);
+	}
+	public static String createNickname(String name) {
+		int secondVowelPsn = findSecond(name);
+		String nickname = "";
+		nickname = name.substring(0,secondVowelPsn);
+		return nickname;
+	}
+	
+	private static int findSecond(String word) {
+		boolean foundVowel = false;
+		int index = word.length();
+		for(int i = 0; i< word.length();i++){
+			if(word.substring(i, i+1).equals("a")||
+			word.substring(i, i+1).equals("e")||
+			word.substring(i, i+1).equals("i")||
+			word.substring(i, i+1).equals("o")||
+			word.substring(i, i+1).equals("u")) {
+				if(!foundVowel) {
+					foundVowel = true;
+				}
+				else {
+					
+					return i;
+				}
+		}
+		}
+		return index;
+	}
+
 	public void mingle(Person[] people) {
 		for (Person p: people) {
 			if(p != this) {
@@ -38,6 +83,7 @@ public class Person {
 			}
 		}
 	}
+	
 	private Person betterFriend(Person p, Person q) {
 		if(p == null) {
 			return q;
@@ -86,9 +132,10 @@ public class Person {
 	}
 
 	public String toString() { 
-		return "My name is " + firstName+ " "+ lastName+ " and I live in "+ home + "."+ "I like to " + hobby + ".";
+		return "My name is " + firstName+ " "+ lastName+ " and I live in "+ home + "."+ "I like to " + hobby + "." + "Call me " + nickname + ".";
 		
 		
 	}
 
 }
+

@@ -16,7 +16,7 @@ public class TwoDArrayPractice {
 		//		drawHorizontalLine(pic,3);
 		//		drawHorizontalLine(pic,5);
 		//		drawVerticalLine(pic, 2);
-		drawBox(pic,4,5);
+		drawBox(pic,0,0);
 		print(pic);
 	}
 

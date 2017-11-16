@@ -39,7 +39,7 @@ public class Animal {
 		trait1 = new Trait();
 		trait2 = new Trait();
 		while(trait1.equals(trait2)) {
-			trait 2 = new Trait();
+			trait2 = new Trait();
 		}
 	}
 	public String toString() {

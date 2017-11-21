@@ -27,7 +27,7 @@ public class ReproductionAnimal extends RoamingAnimal {
 		super(matingArea, description, trait1, trait2);
 		maxLitter = 1;
 	}
-	public void setMaxLitterSixe(int max) {
+	public void setMaxLitterSize(int max) {
 		this.maxLitter = max;
 	}
 	public ReproductionAnimal getOffspring(ReproductionAnimal mate) {

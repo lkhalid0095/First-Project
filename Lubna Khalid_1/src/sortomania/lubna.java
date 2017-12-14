@@ -64,7 +64,7 @@ public class lubna {
 		            R[b] = arr[m + 1+ b];
 		 
 		 
-		        /* Merge the temp arrays */
+		        /* Merge the temp arrays j*/
 		 
 		        // Initial indexes of first and second subarrays
 		        int i = 0, j = 0;
